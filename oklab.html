@@ -8,15 +8,26 @@
 			body {
 				background-color: #ccc;
 				color: #000;
+				margin:0;
 			}
-
 			a {
 				color: #f00;
+			}
+			#info {
+				position: absolute;
+				top: 10px;
+				left:10px;
+				width: 100%;
+				z-index: 100;
+				display:block;
 			}
 		</style>
 	</head>
 
 	<body>
+		<div id="info">
+			<h3><a href="https://bottosson.github.io/posts/oklab">Oklab</a> color space visualisation</h3>
+		</div>
 		<script type="module">
 
 			import * as THREE from 'https://unpkg.com/three/build/three.module.js';

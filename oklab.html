@@ -87,11 +87,22 @@
 					mesh.matrixAutoUpdate = false;
 					return mesh;
 				}
+				function oklchColorPoint(L, chroma, hue) {
+					const a = Math.cos(hue) * chroma;
+					const b = Math.sin(hue) * chroma;
+					return oklabColorPoint(L, a, b);
+				}
 
 				for (let L = 0; L < 1; L += 0.0249) {
-					for (let a = -1; a < 1; a += 0.01) {
-						for (let b = -1; b < 1; b += 0.01) {
-							const mesh = oklabColorPoint(L, a, b);
+					let chromastep = 0.05;
+					for (let chroma = 0; chroma < 1; chroma += chromastep) {
+						if (chromastep > 0.001) {
+							chromastep *= 0.88;
+						}
+
+						for (let ihue = 0; ihue < 100 * chroma + 1; ihue += 0.1) {
+							const hue = ihue / (100*chroma+1) * 2 * Math.PI;
+							const mesh = oklchColorPoint(L, chroma, hue);
 							if (mesh) {
 								scene.add(mesh);
 							}
